@@ -9,6 +9,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { HistoryItem } from "../history/page";
 import { TotalUsageContext } from "@/app/(context)/TotalUsageContext";
 import { UpdateCreditUsageContext } from "@/app/(context)/UpdateCreditUsageContext";
+import Link from "next/link";
 
 function UsageTrack() {
   const { user } = useUser();
@@ -34,9 +35,9 @@ function UsageTrack() {
     GetTotalUsage(result);
   };
 
-  const GetTotalUsage = (result: HistoryItem) => {
+  const GetTotalUsage = (result: HistoryItem[]) => {
     let total: number = 0;
-    result.forEach((element) => {
+    result.forEach((element: { aiResponse: string | any[] }) => {
       total = total + Number(element.aiResponse?.length);
     });
     setTotalUsage(total);
@@ -54,9 +55,16 @@ function UsageTrack() {
         </div>
         <h2 className="text-sm my-2">{totalUsage}/10000 Credits Used</h2>
       </div>
-      <Button variant={"secondary"} className="w-full my-3 text-primary">
-        Upgrade
-      </Button>
+      <Link href={"dashboard/billing"}>
+        <Button variant={"secondary"} className="w-full my-3 text-primary">
+          Upgrade
+        </Button>
+      </Link>
+      <Link href="/">
+        <Button variant={"outline"} className="w-full my-3 text-primary">
+          Back to Homepage
+        </Button>
+      </Link>
     </div>
   );
 }
