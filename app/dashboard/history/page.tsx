@@ -23,10 +23,9 @@ export interface HistoryItem {
   templateSlug: string;
   aiResponse: string;
   createdAt: string;
-  wordCount: number;
 }
 
-export default function HistoryPage() {
+async function HistoryPage() {
   const [historyItems, setHistoryItems] = useState<HistoryItem[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const { user } = useUser();
