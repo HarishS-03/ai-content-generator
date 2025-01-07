@@ -25,7 +25,7 @@ export interface HistoryItem {
   createdAt: string;
 }
 
-async function HistoryPage() {
+export default function HistoryPage() {
   const [historyItems, setHistoryItems] = useState<HistoryItem[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const { user } = useUser();
